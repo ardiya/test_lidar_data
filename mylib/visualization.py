@@ -6,7 +6,6 @@ import numpy as np
 
 class Visualizer:
     LIDAR_RANGE = 20.0  # meter, TODO: Automatically determine based on the input
-    T_VIS = np.array([[1, 0, 0], [0, -1, 0], [0, 0, 1]])  # TODO: clarify data
 
     def __init__(self):
         pass
@@ -29,7 +28,7 @@ class Visualizer:
                                 linewidth=1, c=(0, 0, 0, 0.5))
         # Draw the points denoting wall with different color
         for i, (pts, T) in enumerate(zip(self.lidar_data, self.trajectories)):
-            new_pts = T @ self.T_VIS @ pts
+            new_pts = T @ pts
             self.ax_lidar_comb.scatter(new_pts[:, 0, 2], new_pts[:, 1, 2],
                                        marker='o', s=1, c=[self.colors[i]])
         # create dummy for position in combined subplot

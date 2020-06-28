@@ -45,8 +45,8 @@ def read_lidar(filename: str, scale_factor=1.0/1000.0,
                 angle, dist = [float(x) for x in line.split(",")]
                 if not lidar_range[0] <= dist <= lidar_range[1]:
                     continue
-                x = np.cos(np.deg2rad(angle)) * dist * scale_factor
-                y = np.sin(np.deg2rad(angle)) * dist * scale_factor
+                x = np.cos(np.deg2rad(-angle)) * dist * scale_factor
+                y = np.sin(np.deg2rad(-angle)) * dist * scale_factor
                 pt = np.array([[1.0, 0.0, x],
                                [0.0, 1.0, y],
                                [0.0, 0.0, 1.0]])

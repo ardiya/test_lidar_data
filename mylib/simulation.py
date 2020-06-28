@@ -30,8 +30,8 @@ class Simulation:
 
         result = list()
         for angle in np.arange(self.angle_start, self.angle_end, self.angle_step):
-            v_x = np.sin(np.deg2rad(angle)) * self.lidar_range
-            v_y = np.cos(np.deg2rad(angle)) * self.lidar_range
+            v_x = np.sin(np.deg2rad(90+angle)) * self.lidar_range
+            v_y = np.cos(np.deg2rad(90+angle)) * self.lidar_range
 
             distances = list()
             vis_datas = list()  # data for visualizing intersection
