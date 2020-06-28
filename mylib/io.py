@@ -53,6 +53,23 @@ def read_lidar(filename: str, scale_factor=1.0/1000.0,
     return result
 
 
+def read_map(filename: str) -> List[Tuple[float, float, float, float]]:
+    """
+    Read the map data from file and return it as list of tuple[x1, y1, x2, y2]. Each tuple represent wall
+    """
+    result = list()
+    with open(filename, "r") as fp:
+        while True:
+            line = fp.readline()
+            if line == "":
+                break
+            points = tuple(float(x) for x in line.split(","))
+            if len(points) != 4:
+                continue
+            result.append(points)
+    return result
+
+
 if __name__ == "__main__":
     trajectories = read_trajectories("data/FlightPath.csv")
     assert type(trajectories) == list
@@ -68,3 +85,10 @@ if __name__ == "__main__":
         assert type(points) == type(np.array([]))
         assert len(points.shape) == 3
         assert points.shape[1:] == (3, 3)
+
+    map_data = read_map("data/extra/Mapping.csv")
+    assert type(map_data) == list
+    assert len(map_data) == 11
+    for row in map_data:
+        assert type(row) == tuple
+        assert len(row) == 4
