@@ -1,4 +1,4 @@
-from mylib.io import read_map, read_trajectories
+from mylib.io import read_map, read_trajectories, write_map
 from mylib.util import compute_line_intersection
 from mylib.simulation import Simulation
 
@@ -14,6 +14,8 @@ if __name__ == "__main__":
                         default="data/extra/Mapping.csv")
     parser.add_argument("-t", "--trajectories", type=str,
                         default="data/FlightPath.csv")
+    parser.add_argument("-o", "--lidar_out", type=str,
+                        default="data/extra/LIDARPoints.csv")
     parser.add_argument("--angle_start", type=float, default=0.0)
     parser.add_argument("--angle_end", type=float, default=360.0)
     parser.add_argument("--angle_step", type=float, default=1.0)
@@ -35,3 +37,5 @@ if __name__ == "__main__":
         scan_data = sim.scan((traj_x, traj_y), visualize_raycast=args.visualize_raycast)
         all_trajectories_scan.append(scan_data)
     
+    write_map(args.lidar_out, all_trajectories_scan)
+    print("Map written in", args.lidar_out, ". Total sweep:", len(all_trajectories_scan))

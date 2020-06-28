@@ -1,3 +1,5 @@
+from mylib.simulation import ScanData
+
 import numpy as np
 from typing import List
 from typing import Tuple
@@ -68,6 +70,14 @@ def read_map(filename: str) -> List[Tuple[float, float, float, float]]:
                 continue
             result.append(points)
     return result
+
+
+def write_map(filename: str, all_trajectories_scan: List[List[ScanData]]):
+    with open(filename, "w") as fp:
+        for sweep_id, sweep_data in enumerate(all_trajectories_scan):
+            fp.write("{0},{1}\n".format(sweep_id, len(sweep_data)))
+            for angle, dist in sweep_data:
+                fp.write("{0},{1}\n".format(angle, dist))
 
 
 if __name__ == "__main__":

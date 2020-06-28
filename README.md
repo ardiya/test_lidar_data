@@ -26,6 +26,7 @@ Usage:
 python3 main_simulation.py
     [--map_path "/path/to/mapping.csv"] 
     [--trajectories "/path/to/FlightPath.csv"]
+    [--lidar_out "/path/to/LidarPoints.csv"]
     [--angle_start 0.0]
     [--angle_end 360.0]
     [--angle_step 1.0]
