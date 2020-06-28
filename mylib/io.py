@@ -15,7 +15,7 @@ def read_trajectories(filename: str, scale_factor: float = 1.0) -> List[np.array
                 break
             # sweep_id, n = [int(x) for x in line.split(",")] # The data format is pretty useless
             line = fp.readline()
-            x, y = [float(a) for a in line.split(",")]
+            x, y = [float(a) * scale_factor for a in line.split(",")]
             pt = [[1.0, 0.0, x],
                   [0.0, 1.0, y],
                   [0.0, 0.0, 1.0]]
